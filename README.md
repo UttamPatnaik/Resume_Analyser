@@ -10,7 +10,7 @@ A modern, minimalist, and SEO-friendly web application that provides instant, AI
 ---
 
 ## 🔗 Live Demo
-👉 [Click here to try Resume Analyzer]((https://resume-analyser-black.vercel.app/))
+👉 [Click here to try Resume Analyzer](https://resume-analyser-black.vercel.app/)
 
 ---
 
@@ -49,7 +49,7 @@ Resume-Analyzer
 ---
 
 ## ▶️ How to Use
-1. Visit the [Live Demo]((https://resume-analyser-black.vercel.app/))  
+1. Visit the [Live Demo](https://resume-analyser-black.vercel.app/)  
 2. Upload your resume (**PDF, DOC, DOCX**)  
 3. View instant analysis, scores, and improvement tips  
 
