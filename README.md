@@ -49,7 +49,7 @@ Resume-Analyzer
 ---
 
 ## ▶️ How to Use
-1. Visit the [Live Demo](https://your-deployment-link.com)  
+1. Visit the [Live Demo]((https://resume-analyser-black.vercel.app/))  
 2. Upload your resume (**PDF, DOC, DOCX**)  
 3. View instant analysis, scores, and improvement tips  
 
