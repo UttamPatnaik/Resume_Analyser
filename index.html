@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Resume Analyser – Online Resume Feedback & Score Tool</title>
+    <meta name="description" content="Get instant, professional feedback on your resume with our AI-powered Resume Analyser. Upload your CV and receive detailed analysis, scoring, and improvement suggestions to boost your job prospects.">
+    <meta name="keywords" content="resume analyzer, CV feedback, resume checker, job application tool, career improvement">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Resume Analyser – Online Resume Feedback & Score Tool">
+    <meta property="og:description" content="Get instant, professional feedback on your resume with our AI-powered analysis tool.">
+    <meta property="og:type" content="website">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Resume Analyser",
+        "description": "AI-powered resume analysis and feedback tool",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser"
+    }
+    </script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Resume Analyser</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#upload">Analyze Resume</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Resume Analyser</h1>
+                <p class="hero-subtitle">Get instant, professional feedback on your resume with AI-powered analysis. Boost your job prospects with actionable insights and improvement suggestions.</p>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section" id="upload">
+                <div class="upload-area" onclick="document.getElementById('resume-file').click()">
+                    <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <div class="upload-text">Click to upload your resume or drag and drop</div>
+                    <div class="upload-hint">Supports PDF, DOC, DOCX files (max 5MB)</div>
+                    <input type="file" id="resume-file" class="file-input" accept=".pdf,.doc,.docx" />
+                </div>
+                
+                <div class="file-preview" id="file-preview"></div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your resume... This may take a few moments.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="upload-btn" id="analyze-btn" disabled>Analyze Resume</button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results" id="results">
+                <div class="score-display">
+                    <div class="score-circle" id="score-circle">
+                        <span class="score-value" id="score-value">0</span>
+                    </div>
+                    <div class="score-label">Overall Resume Score</div>
+                </div>
+
+                <div class="analysis-grid" id="analysis-grid">
+                    <!-- Analysis cards will be populated here -->
+                </div>
+
+                <div class="suggestions" id="suggestions">
+                    <h3>Improvement Suggestions</h3>
+                    <ul class="suggestion-list" id="suggestion-list">
+                        <!-- Suggestions will be populated here -->
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features" id="features">
+                <h2>Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h3>Instant Analysis</h3>
+                        <p>Get immediate feedback on your resume with our advanced AI analysis engine that evaluates content, format, and keywords.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <h3>Detailed Scoring</h3>
+                        <p>Receive comprehensive scoring across multiple criteria including content quality, formatting, and ATS compatibility.</p>
+                    </div>
+                    <div class="feature-card">
+                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <h3>Actionable Insights</h3>
+                        <p>Get specific, actionable recommendations to improve your resume and increase your chances of landing interviews.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works" id="how-it-works">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Upload Resume</h3>
+                        <p>Upload your resume in PDF, DOC, or DOCX format. Our system supports all major file types.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>AI Analysis</h3>
+                        <p>Our advanced AI analyzes content, structure, keywords, and ATS compatibility in seconds.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Get Feedback</h3>
+                        <p>Receive detailed scoring, analysis, and specific suggestions to improve your resume.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Resume Analyser. Built to help you land your dream job.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
