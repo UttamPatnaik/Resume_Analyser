@@ -10,7 +10,7 @@ A modern, minimalist, and SEO-friendly web application that provides instant, AI
 ---
 
 ## 🔗 Live Demo
-👉 [Click here to try Resume Analyzer](https://your-deployment-link.com)
+👉 [Click here to try Resume Analyzer]((https://resume-analyser-black.vercel.app/))
 
 ---
 
