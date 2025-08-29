@@ -1,4 +1,4 @@
-# 📄 Resume_Analyzer
+# 📄 Resume Analyzer
 
 A modern, minimalist, and SEO-friendly web application that provides instant, AI-powered feedback on resumes to help job seekers improve their chances of landing interviews.
 
@@ -6,6 +6,11 @@ A modern, minimalist, and SEO-friendly web application that provides instant, AI
 
 ## 🚀 Overview
 **Resume Analyzer** lets users upload their resumes (**PDF, DOC, DOCX**) and receive a detailed assessment covering content quality, formatting, keyword optimization, and ATS compatibility. The UI is clean, mobile-first, and accessibility-focused.
+
+---
+
+## 🔗 Live Demo
+👉 [Click here to try Resume Analyzer](https://your-deployment-link.com)
 
 ---
 
@@ -44,11 +49,9 @@ Resume-Analyzer
 ---
 
 ## ▶️ How to Use
-1. Open `Client/index.html`  
-2. Drag & drop or select your resume file (**PDF, DOC, DOCX**)  
-3. Click **Analyze**  
-4. View your resume’s **score** and **detailed suggestions**  
-5. Click **Analyze Another Resume** to reset and upload a new file  
+1. Visit the [Live Demo](https://your-deployment-link.com)  
+2. Upload your resume (**PDF, DOC, DOCX**)  
+3. View instant analysis, scores, and improvement tips  
 
 ---
 
