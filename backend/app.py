@@ -15,9 +15,10 @@ NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY")
 app = FastAPI()
 
 # Enable CORS so your HTML frontend can communicate with this server
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["*"],  # This is the magic line that fixes the block!
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
