@@ -136,7 +136,7 @@ async function analyzeResume() {
         formData.append('resume_file', uploadedFile); 
 
         // 2. Send request to your local FastAPI server
-        const response = await fetch('http://localhost:8000/api/analyze', {
+        const response = await fetch('https://resume-analyser-dbrh.onrender.com', {
             method: 'POST',
             body: formData
         });
