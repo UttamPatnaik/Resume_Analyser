@@ -118,14 +118,27 @@ function showSuccess(message) {
 }
 
 // REAL BACKEND CONNECTION
+// REAL BACKEND CONNECTION
 async function analyzeResume() {
     if (!uploadedFile) {
         showError('Please select a file first.');
         return;
     }
 
-    // Show loading state
+    // Show loading state with the Cold Start warning
     loading.style.display = 'block';
+    
+    // Safely inject the text inside the loading container 
+    // (If you have a CSS spinner inside #loading, make sure your HTML still includes it above this text!)
+    loading.innerHTML = `
+        <div class="loader-spinner" style="margin: 0 auto; margin-bottom: 15px;"></div>
+        <p style="font-weight: 600; margin-bottom: 8px;">Analyzing Resume...</p>
+        <small style="display: block; color: #64748b; font-size: 0.85em; max-width: 80%; margin: 0 auto; line-height: 1.4;">
+            ⚠️ <b>Note:</b> The first upload may take 60-90 seconds while the free cloud server wakes up. 
+            Subsequent uploads will be instant!
+        </small>
+    `;
+
     analyzeBtn.disabled = true;
     results.style.display = 'none';
     hideError();
@@ -135,7 +148,7 @@ async function analyzeResume() {
         const formData = new FormData();
         formData.append('resume_file', uploadedFile); 
 
-        // 2. Send request to your local FastAPI server
+        // 2. Send request to your live Render server
         const response = await fetch('https://resume-analyser-dbrh.onrender.com/api/analyze', {
             method: 'POST',
             body: formData
