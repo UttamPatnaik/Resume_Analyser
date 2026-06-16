@@ -46,6 +46,18 @@ async def analyze_resume(resume_file: UploadFile = File(...)):
         if len(text.strip()) == 0:
             raise HTTPException(status_code=400, detail="Could not extract any text from the PDF.")
 
+        # Check basic resume-like keywords as a quick check (lenient)
+        lower_text = text.lower()
+        resume_keywords = [
+            "education", "experience", "skills", "projects", "employment", "work", "contact", "phone", "email", "cv", "resume",
+            "educación", "experiencia", "habilidades", "proyectos", "contacto", "teléfono",
+            "formation", "expérience", "compétences", "projets",
+            "ausbildung", "berufserfahrung", "kenntnisse", "projekte"
+        ]
+        match_count = sum(1 for keyword in resume_keywords if keyword in lower_text)
+        if match_count < 2:
+            raise HTTPException(status_code=400, detail="The uploaded document does not appear to be a resume. Please upload a valid resume.")
+
         # --- ADD THESE 3 LINES ---
         print("\n=== EXTRACTED RESUME TEXT ===")
         print(text[:500]) # Prints the first 500 characters
@@ -65,7 +77,10 @@ async def analyze_resume(resume_file: UploadFile = File(...)):
         [Request ID: {request_id}] 
         You are an advanced ATS (Applicant Tracking System) and senior technical recruiter with expertise in evaluating resumes for software engineering, data science, and IT roles.
 
-        Your task is to critically analyze the provided resume text exactly like a real ATS + recruiter screening process.
+        Your task is to first determine if the provided text is indeed a professional resume, CV, or portfolio. 
+        If the provided text is NOT a resume (e.g. it is a research paper, article, book excerpt, recipe, tutorial, cover letter, generic documentation, or random gibberish), you must set the "is_resume" field to false in the JSON. In this case, you can set the overall_score to 0, and leave other fields empty or default.
+        
+        If the provided text is a resume, CV, or portfolio, set "is_resume" to true and critically analyze the resume text exactly like a real ATS + recruiter screening process.
 
         IMPORTANT RULES:
         - Be highly strict and realistic in scoring.
@@ -97,6 +112,7 @@ async def analyze_resume(resume_file: UploadFile = File(...)):
 
         JSON FORMAT:
         {{
+          "is_resume": true,
           "overall_score": 0,
           "resume_level": "Poor | Average | Good | Strong | Excellent",
           "sections": {{
@@ -138,7 +154,10 @@ async def analyze_resume(resume_file: UploadFile = File(...)):
             elif "```" in clean_json_string:
                 clean_json_string = clean_json_string.split("```")[1].split("```")[0].strip()
                 
-            return json.loads(clean_json_string)
+            result_data = json.loads(clean_json_string)
+            if not result_data.get("is_resume", True):
+                raise HTTPException(status_code=400, detail="The uploaded document does not appear to be a resume. Please upload a valid resume.")
+            return result_data
         else:
             # This will force the backend to show us NVIDIA's exact error message!
             error_msg = f"NVIDIA Error {response.status_code}: {response.text}"
