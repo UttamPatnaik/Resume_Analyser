@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     NVIDIA_API_URL: str = "https://integrate.api.nvidia.com/v1/chat/completions"
 
-    MODEL_NAME: str = "meta/llama-3.1-8b-instruct"
+    MODEL_NAME: str = "deepseek-ai/deepseek-v4.1-flash"
 
     REQUEST_TIMEOUT: int = 60
 
