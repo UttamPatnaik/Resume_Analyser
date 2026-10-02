@@ -102,6 +102,17 @@ class NVIDIAClient:
             response.raise_for_status()
 
         except requests.RequestException as exc:
+            print("\n========== NVIDIA API ERROR ==========")
+
+            if hasattr(exc, "response") and exc.response is not None:
+                print("Status:", exc.response.status_code)
+                print("Response:", exc.response.text)
+
+            else:
+                print("Request error:", str(exc))
+
+            print("======================================\n")
+
             raise AIConnectionError(
                 message="Unable to communicate with the AI service.",
                 code="AI_CONNECTION_ERROR",
