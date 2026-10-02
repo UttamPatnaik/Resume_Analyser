@@ -1,3 +1,4 @@
+
 # 📄 Resume Analyzer (Full-Stack AI Application)
 
 A modern, full-stack AI-powered resume analysis application that evaluates resumes using deterministic document analysis and NVIDIA-hosted LLM inference. The system combines PDF extraction, document validation, resume structure analysis, and AI-based evaluation to provide realistic ATS-style feedback.
@@ -29,7 +30,7 @@ The goal is to reduce AI hallucinations and make the analysis more evidence-base
 
 👉 https://resume-analyser-black.vercel.app/
 
-> The frontend is deployed on Vercel. The backend API is deployed separately and communicates with the NVIDIA API for AI analysis.
+> The frontend is deployed on Vercel. The backend API is deployed separately on Render and communicates with the NVIDIA API for AI analysis.
 
 ---
 
@@ -264,9 +265,13 @@ The current architecture separates document processing, deterministic analysis, 
 ## 💻 Tech Stack
 
 **Frontend**
-- HTML5
-- CSS3
-- JavaScript
+- React
+- TypeScript
+- Vite
+- TanStack Router
+- Tailwind CSS
+- shadcn/ui
+- Bun (package manager / lockfile)
 
 **Backend**
 - Python
@@ -296,9 +301,45 @@ The current architecture separates document processing, deterministic analysis, 
 Resume_Analyser/
 │
 ├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   ├── components.json
+│   ├── .env.example
+│   │
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   └── robots.txt
+│   │
+│   └── src/
+│       ├── components/
+│       │   ├── analysis-progress.tsx
+│       │   ├── app-header.tsx
+│       │   ├── insight-list.tsx
+│       │   ├── results-dashboard.tsx
+│       │   ├── score-visuals.tsx
+│       │   ├── upload-panel.tsx
+│       │   └── ui/            # shadcn/ui primitives
+│       │
+│       ├── hooks/
+│       │   └── use-mobile.tsx
+│       │
+│       ├── lib/
+│       │   ├── api.ts
+│       │   ├── error-capture.ts
+│       │   ├── error-page.ts
+│       │   ├── lovable-error-reporting.ts
+│       │   └── utils.ts
+│       │
+│       ├── routes/
+│       │   ├── __root.tsx
+│       │   └── index.tsx
+│       │
+│       ├── router.tsx
+│       ├── routeTree.gen.ts
+│       ├── server.ts
+│       ├── start.ts
+│       └── styles.css
 │
 └── backend/
     │
@@ -439,13 +480,14 @@ The system also provides qualitative feedback rather than returning only a numer
 
 **Prerequisites:**
 - Python 3.10+
+- Node.js (or Bun) for the frontend
 - Git
 - NVIDIA API key
 - Modern web browser
 
 **1. Clone the Repository**
 ```bash
-git clone [https://github.com/UttamPatnaik/Resume_Analyser.git](https://github.com/UttamPatnaik/Resume_Analyser.git)
+git clone https://github.com/UttamPatnaik/Resume_Analyser.git
 cd Resume_Analyser
 ```
 
@@ -482,16 +524,23 @@ From the backend directory:
 ```bash
 python -m uvicorn app.main:app --reload
 ```
-- The API will be available at: `http://some-ip-addr:port_no`
-- Swagger documentation: `http://some-ip-addr:port_no/docs`
+- The API will be available at: `http://127.0.0.1:8000`
+- Swagger documentation: `http://127.0.0.1:8000/docs`
 
 **5. Run the Frontend**
-The frontend is a static application. Open `frontend/index.html` using a local development server such as VS Code Live Server.
-
-Make sure the frontend API URL points to the local backend during development. Example:
-```javascript
-const API_URL = "[http://some-ip-addr:port_no](http://some-ip-addr:port_no)";
+From the `frontend/` directory:
+```bash
+bun install
+bun run dev
 ```
+
+The Vite dev server will start and print a local URL (typically `http://localhost:5173`). Configure the frontend's API base URL so it points to the local backend during development:
+
+```env
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+The frontend reads this value via `src/lib/api.ts`.
 
 ---
 
@@ -519,17 +568,17 @@ NVIDIA API
 - **Frontend:** Deployed using Vercel
 - **Backend:** Deployed using Render
 
-*The backend requires the appropriate environment variables to be configured in the Render dashboard.*
+*The backend requires the appropriate environment variables to be configured in the Render dashboard. The frontend requires `VITE_API_URL` to point at the deployed Render backend.*
 
 ---
 
 ## 🧪 Testing
 
-The backend can be tested using Swagger (`/api/docs`) or directly through the API.
+The backend can be tested using Swagger (`/docs`) or directly through the API.
 
 **Example:**
 ```bash
-curl -X POST "[http://some-ip-addr:port_no/api/analyze](http://some-ip-addr:port_no/api/analyze)" \
+curl -X POST "http://127.0.0.1:8000/api/analyze" \
   -H "accept: application/json" \
   -H "Content-Type: multipart/form-data" \
   -F "resume_file=@RESUME.pdf;type=application/pdf"
@@ -573,6 +622,7 @@ Current development version.
 - Improved error handling
 - Separation between deterministic analysis and LLM analysis
 - Improved handling of image/scanned-document considerations
+- React + TypeScript + Vite frontend with TanStack Router and shadcn/ui
 
 **Current Architecture:**
 ```text
