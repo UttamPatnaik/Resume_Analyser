@@ -77,7 +77,7 @@ class PromptBuilder:
         )
 
         prompt = prompt.replace(
-            "{{structure_data}}",
+            "{{structure}}",
             structure_json,
         )
 
