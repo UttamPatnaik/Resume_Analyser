@@ -18,9 +18,9 @@ app.add_exception_handler(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # We'll restrict this in production
+    allow_origins=["https://resume-analyser-black.vercel.app","https://resume-analyser-e4wxm07t6-uttam-patnaiks-projects.vercel.app"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"]
     allow_headers=["*"],
 )
 
